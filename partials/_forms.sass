@@ -1,0 +1,39 @@
+.input
+    &--toggle
+        z-index: -1
+        opacity: 0
+        margin: 0
+
+        & + label
+            position: relative
+            padding: 0 0 0 50px
+            cursor: pointer
+            font-size: 1.4rem
+            line-height: 20px
+
+        & + label:after, & + label:before
+            content: ""
+            position: absolute
+            transition: 0.2s
+            border-radius: 20px
+
+        & + label:before
+            left: 0
+            background: #E7E9ED
+            border: 1px solid #CACED7
+
+            +size(35px, 20px)
+
+        & + label:after
+            top: 2px
+            left: 1px
+            background: #FFF
+
+            +square(16px)
+
+        &:checked + label:before
+            background: $primary
+            border-color: $primary
+
+        &:checked + label:after
+            left: 18px

@@ -1,0 +1,64 @@
+// positioning ==> postion: fixed 0 0 0 0
+=position($position, $top: null, $right: null, $bottom: null, $left: null)
+    position: $position
+    top: $top
+    right: $right
+    bottom: $bottom
+    left: $left
+
+// postcss size
+=size($width, $height)
+    width: $width
+    height: $height
+
+=square($size)
+    +size($size, $size)
+
+// removes margin from first and last element on a container with repeated childs
+=no-margin-first-last
+    &:first-child
+        margin-top: 0
+        margin-left: 0
+
+    &:last-child
+        margin-right: 0
+
+// Flex
+=flex
+    display: flex
+    align-items: center
+
+// Darken Text on Hover
+=darken-hover($color)
+    &:hover
+        color: darken($color, 5%)
+
+// Buttons
+=btn-border-color($btnBorderColor)
+    border: 1px solid $btnBorderColor
+
+    @if $btnBorderColor == $white
+        color: $white
+    @else
+        color: $btnBorderColor
+
+=btn-hover($btnBgColor)
+    &:hover
+        @if $btnBgColor == $white
+            color: $black
+            background: darken($btnBgColor, 5%)
+        @else if $btnBgColor == $grey or $btnBgColor == $black or $btnBgColor == $primary or $btnBgColor == $danger
+            color: $white
+            background: darken($btnBgColor, 5%)
+        @else
+            background: darken($btnBgColor, 5%)
+
+    &:active
+        @if $btnBgColor == $white
+            color: $black
+            background: darken($btnBgColor, 8%)
+        @else if $btnBgColor == $grey
+            color: $white
+            background: darken($btnBgColor, 8%)
+
+        background: darken($btnBgColor, 8%)

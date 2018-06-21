@@ -1,0 +1,59 @@
+.dropdown
+    position: relative
+
+    // spacing in case of multiple dropdowns
+    & + &
+        margin-left: 30px
+
+    // color state
+    &--light
+        .dropdown__wrapper
+            background-color: $light-background
+            color: $black
+
+        .dropdown__result:hover
+            background-color: darken($white, 4%)
+
+    &--dark
+        .dropdown__wrapper
+            background-color: $dark-background
+            color: $white
+
+        .dropdown__result:hover
+            background-color: rgba($light-background, 0.05)
+
+    // text link that init/opens the dropdown__wrapper
+    &__select-text
+        cursor: pointer
+
+        &--light
+            color: $white
+
+        &--dark
+            color: $black
+
+    &__icon
+        margin-left: 6px
+
+        +square(15px)
+
+    // the div container for all the items
+    &__wrapper
+        z-index: 50
+        border-radius: 4px
+        box-shadow: 0 2px 5px 0 rgba(#000, 0.15)
+        min-width: 160px
+        padding: 14px 0
+        max-height: 350px
+        overflow-y: auto
+
+        +position(absolute, $top: 40px, $left: 0)
+
+        &--align-right
+            +position(absolute, $top: 40px, $right: 0, $left: unset)
+
+    // the single items
+    &__result
+        cursor: pointer
+        padding: 10px 20px
+        white-space: nowrap

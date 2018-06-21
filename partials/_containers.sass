@@ -1,0 +1,33 @@
+.section
+    padding: 40px 0
+
+    &--header
+
+    &--alternative
+        @if $default-background == $light-background
+            background-color: $dark-background
+           @else 
+            background-color: $light-background
+
+.container
+    // sizes
+    &--xs
+
+    &--sm
+
+    &--lg
+
+    &--xl
+
+    &--full-width
+        width: 100%
+
+.flexbox
+    +flex
+
+    &--center
+        justify-content: center
+        
+    &--align-right
+        white-space: nowrap
+        margin: 0 0 0 auto
