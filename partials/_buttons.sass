@@ -1,24 +1,41 @@
 .btn
+    display: inline-block
+    text-transform: uppercase
+    font-weight: 700
+    padding: 14px 24px
+    white-space: nowrap
+    letter-spacing: 0.5px
+    transition: box-shadow $standard-time linear, background $standard-time linear
+
+    // border radius
+    border-radius: 100px
+
+    // sizes
+    &--xs
+        padding: 6px 8px
+
+    &--sm
+        padding: 10px 16px
+
+    &--lg
+        padding: 20px 30px
+
+    &--full-width
+        width: 100%
+
     // color
     &--primary
+        background-color: $color-primary
 
     &--secondary
+        background-color: $color-secondary
 
     // border
     &--border
         border: 1px solid
 
         &-primary
-            border-color: primary
+            border-color: $color-primary
 
         &-secondary
-            border-color: primary
-
-    // sizes
-    &--xs
-
-    &--sm
-
-    &--lg
-
-    &--xl
+            border-color: $color-secondary

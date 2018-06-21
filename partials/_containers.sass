@@ -35,3 +35,11 @@
     &--align-right
         white-space: nowrap
         margin: 0 0 0 auto
+
+.grid
+    display: grid
+
+    @for $i from 1 through 5
+        &__col-#{$i}
+            grid-template-columns: repeat(#{$i}, 1fr)
+            grid-gap: 30px 20px
