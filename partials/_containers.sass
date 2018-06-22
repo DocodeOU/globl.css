@@ -1,13 +1,35 @@
+.header
+    // the main header
+    &--hero
+        +flex
+
+        margin-top: -60px
+        margin-bottom: 0
+        padding-top: 100px
+        min-height: 320px
+
 .section
     padding: 40px 0
 
-    &--header
+    // sizes
+    &--half-screen
+        min-height: 50vh
 
-    &--alternative
+    &--full-screen
+        height: 100vh
+
+    // baxkground colors
+    &--bg-alternative
         @if $default-background == $light-background
             background-color: $dark-background
-           @else 
+        @else
             background-color: $light-background
+
+    &--bg-primary
+        background-color: $color-primary
+
+    &--bg-secondary
+        background-color: $color-secondary
 
 .container
     // sizes
@@ -31,7 +53,7 @@
 
     &--center
         justify-content: center
-        
+
     &--align-right
         white-space: nowrap
         margin: 0 0 0 auto
