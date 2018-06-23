@@ -1,0 +1,21 @@
+// **** avoid as much as possible ****
+// creates spacing utilities for padding/margin top and bottom
+@for $n from 10 through 100
+    @if $n % 10 == 0
+        .u-padding-#{$n}
+            padding: #{$n}px 0
+
+        .u-pt-#{$n}
+            padding-top: #{$n}px
+
+        .u-pb-#{$n}
+            padding-bottom: #{$n}px
+
+        .u-margin-#{$n}
+            margin: #{$n}px auto
+
+        .u-mt-#{$n}
+            margin-top: #{$n}px
+
+        .u-mb-#{$n}
+            margin-bottom: #{$n}px
