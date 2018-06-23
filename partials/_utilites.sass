@@ -1,21 +1,25 @@
 // **** avoid as much as possible ****
+// try to always define styles inside the components' classes
+
+$utility-class-slug: u !default
+
 // creates spacing utilities for padding/margin top and bottom
 @for $n from 10 through 100
     @if $n % 10 == 0
-        .u-padding-#{$n}
+        .#{$utility-class-slug}-padding-#{$n}
             padding: #{$n}px 0
 
-        .u-pt-#{$n}
+        .#{$utility-class-slug}-pt-#{$n}
             padding-top: #{$n}px
 
-        .u-pb-#{$n}
+        .#{$utility-class-slug}-pb-#{$n}
             padding-bottom: #{$n}px
 
-        .u-margin-#{$n}
+        .#{$utility-class-slug}-margin-#{$n}
             margin: #{$n}px auto
 
-        .u-mt-#{$n}
+        .#{$utility-class-slug}-mt-#{$n}
             margin-top: #{$n}px
 
-        .u-mb-#{$n}
+        .#{$utility-class-slug}-mb-#{$n}
             margin-bottom: #{$n}px
