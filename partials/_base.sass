@@ -5,7 +5,10 @@ html
 
 body
     background-color: $default-background
-    color: $white
+    @if $default-background == $light-background
+        color: $black
+    @else
+        color: $white
     font-weight: 400
     font-family: AvenirNext, helvetica, sans-serif
     font-size: $font-size
