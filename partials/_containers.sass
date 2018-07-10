@@ -1,38 +1,130 @@
+// ***************
+// HEADER
+// ***************
 .header
-    // the main header
-    &--hero
-        +flex
+    +flex
 
-        margin-top: -60px
-        margin-bottom: 0
-        padding-top: 100px
-        min-height: 320px
-
-.section
-    padding: 40px 0
+    justify-content: center
+    position: relative
+    background-repeat: no-repeat
+    background-position: top center
+    background-size: cover
+    min-height: 300px
 
     // sizes
-    &--half-screen
-        min-height: 50vh
+    &--sm
+        min-height: 220px
+        padding-top: 20px
 
-    &--full-screen
+    &--lg
+        min-height: 450px
+
+    // main headers, usually for landing page
+    &--heroFull
+        height: 80vh
+        max-height: 800px
+
+        +media("<phone")
+            padding-top: 30px
+            height: 60vh
+
+    &--heroHalf
+        height: 60vh
+
+        +media("<=phone")
+            height: 50vh
+
+    // add gradients to header, to blend in with backgrounds or next section
+    &__gradient
+        &:after,
+        &:before
+            +position(absolute, $top: 0, $right: 0, $bottom: 0, $left: 0)
+            +square(100%)
+
+            content: ""
+
+        // this class to adds a gradient from the bottom
+        &--fromBottom:after
+            background: linear-gradient(to bottom, rgba($default-background-color, 0) 0, rgba($default-background-color, 0) 40%, $default-background-color 100%)
+
+        // this class to adds a gradient from the left
+        &--fromLeft:before
+            background: linear-gradient(234deg, rgba($default-background-color, 0.4) 0%, rgba($default-background-color, 0.7) 50%, $default-background-color 75%)
+
+    // brings up the z-index of the items inside the header
+    & > .container
+        z-index: 2
+        position: relative
+        padding-top: 40px
+
+// ***************
+// SECTION
+// ***************
+.section
+    position: relative
+    padding: $padding-y 0
+
+    &--padding
+        padding: 80px 0
+
+    // sizes
+    &--fullScreen
         height: 100vh
+        margin: 0
 
-    // baxkground colors
+    // colors
     &--bg-alternative
         @if $default-background == $light-background
             background-color: $dark-background
         @else
             background-color: $light-background
 
-    &--bg-primary
+    &--bgPrimary
         background-color: $color-primary
 
-    &--bg-secondary
+    &--bgSecondary
         background-color: $color-secondary
 
+    // positioning
+    &--flexCentered
+        +flex
+
+        justify-content: center
+        text-align: center
+
+        .container
+            margin-top: -3vh
+
+            // to avoid content being cut off screen
+            +media("<=phone")
+                margin-top: 0
+                padding-top: 50px
+                padding-bottom: 50px
+
+    // elements
+    &__bgOverlay
+        background-repeat: no-repeat
+        background-position: top center
+        background-color: $default-background-color
+
+        +position(absolute, $top: 0, $right: 0, $bottom: 0, $left: 0)
+
+        +media("<phone")
+            background-position: 100%
+
+// ***************
+// CONTAINER
+// ***************
 .container
+    width: 100%
+    max-width: $width-md
+    margin-left: auto
+    margin-right: auto
+
     // sizes
+    &--xxs
+        max-width: $width-xxs
+
     &--xs
         max-width: $width-xs
 
@@ -48,20 +140,48 @@
     &--full-width
         max-width: 100%
 
+    +media("<=desktop")
+        padding-left: $padding-x-sm
+        padding-right: $padding-x-sm
+
 .flexbox
     +flex
 
     &--center
         justify-content: center
 
+    // hack: align right a child div inside flexbox parent
     &--align-right
-        white-space: nowrap
-        margin: 0 0 0 auto
+        margin-left: auto
+
+    // changes the dispay/direction, on phone devices
+    &--column
+        flex-direction: column
+
+        +media("<phone")
+            &\@phone
+                flex-direction: column
+
+.wrapper
+    &--fab-buttons
+        position: fixed
+        bottom: 40px
+        left: 30px
+
+        * + *
+            margin-left: 10px
+
+        &.player-visible
+            margin-bottom: 90px
 
 .grid
     display: grid
 
-    @for $i from 1 through 5
+    @for $i from 1 through 6
         &__col-#{$i}
             grid-template-columns: repeat(#{$i}, 1fr)
-            grid-gap: 30px 20px
+            grid-gap: 40px
+
+            +media("<tablet")
+                grid-template-columns: 1fr
+                grid-row-gap: 20px

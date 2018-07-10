@@ -1,16 +1,79 @@
 // **** avoid as much as possible ****
 // try to always define styles inside the components' classes
 
-$helper-class-slug: h !default
+$utility-class-slug: h !default
 
-.#{$helper-class-slug}-text-center
+=generatePropertyValuePair($property, $values...)
+    $remValue: calc(#{nth($values, 1)} / 10)
+
+    // if list $values has 2 items add both, otherwise add only the first one
+    #{$property}: if(length($values) == 2, #{$remValue}rem #{nth($values, 2)}, #{$remValue}rem)
+
+    // // on mobile, we devide the value passed, by 2
+    // +media("<=phone")
+    //     #{$property}: if(length($values) == 2, calc( #{nth($values, 1)}rem / 2 ) #{nth($values, 2)}, calc( #{nth($values, 1)}rem / 2 ))
+
+// creates spacing utilities for padding/margin top and bottom
+@for $n from 10 through 160
+    @if $n % 10 == 0
+        .#{$utility-class-slug}-padding-#{$n}
+            +generatePropertyValuePair(padding, $n, 0)
+
+        .#{$utility-class-slug}-pt-#{$n}
+            +generatePropertyValuePair(padding-top, $n)
+
+        .#{$utility-class-slug}-pb-#{$n}
+            +generatePropertyValuePair(padding-bottom, $n)
+
+        .#{$utility-class-slug}-margin-#{$n}
+            +generatePropertyValuePair(margin, $n, auto)
+
+        .#{$utility-class-slug}-mt-#{$n}
+            +generatePropertyValuePair(margin-top, $n)
+
+        .#{$utility-class-slug}-mb-#{$n}
+            +generatePropertyValuePair(margin-bottom, $n)
+
+.#{$utility-class-slug}-align-stretch
+    align-items: stretch
+
+.#{$utility-class-slug}-justify-space-between
+    justify-content: space-between
+
+.#{$utility-class-slug}-justify-center
+    justify-content: center
+
+.#{$utility-class-slug}-blur
+    filter: blur(7px)
+
+.#{$utility-class-slug}-text-center
     text-align: center
 
-.#{$helper-class-slug}-text-left
+.#{$utility-class-slug}-text-left
     text-align: left
 
-.#{$helper-class-slug}-text-line-through
+.#{$utility-class-slug}-text-line-through
     text-decoration: line-through
 
-.#{$helper-class-slug}-text-underline
+.#{$utility-class-slug}-text-underline
     text-decoration: underline
+
+.#{$utility-class-slug}-rounded
+    border-radius: 200px
+
+// ***************
+// MEDIA QUERY
+// ***************
++media(">=desktop")
+    .#{$utility-class-slug}-hide\@desktop
+        display: none
+
+
++media("<=tablet")
+    .#{$utility-class-slug}-hide\@tablet
+        display: none
+
+
++media("<=phone")
+    .#{$utility-class-slug}-hide\@phone
+        display: none
