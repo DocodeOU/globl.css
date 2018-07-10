@@ -4,11 +4,13 @@ html
     overflow-x: hidden
 
 body
-    background-color: $default-background
-    @if $default-background == $light-background
+    background-color: $default-background-color
+
+    @if $default-background-color == $light-background
         color: $black
     @else
         color: $white
+
     font-weight: 400
     font-family: AvenirNext, helvetica, sans-serif
     font-size: $font-size

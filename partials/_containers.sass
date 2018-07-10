@@ -73,20 +73,21 @@
         margin: 0
 
     // colors
-    &--bg-alternative
-        @if $default-background == $light-background
-            background-color: $dark-background
+    &--bgAlternativeColor
+        // color opposite of $default-background-color
+        @if $default-background-color == $light-background-color
+            background-color: $dark-background-color
         @else
-            background-color: $light-background
+            background-color: $light-background-color
 
-    &--bgPrimary
+    &--bgPrimaryColor
         background-color: $color-primary
 
-    &--bgSecondary
+    &--bgSecondaryColor
         background-color: $color-secondary
 
     // positioning
-    &--flexCentered
+    &--flexCenter
         +flex
 
         justify-content: center
@@ -116,15 +117,11 @@
 // CONTAINER
 // ***************
 .container
-<<<<<<< HEAD
     width: 100%
     max-width: $width-md
     margin-left: auto
     margin-right: auto
 
-=======
-    max-width: $width-md
->>>>>>> f52513a6874597247eacef6c64b0dd2fcbdb22d1
     // sizes
     &--xxs
         max-width: $width-xxs
@@ -155,7 +152,7 @@
         justify-content: center
 
     // hack: align right a child div inside flexbox parent
-    &--align-right
+    &--alignRight
         margin-left: auto
 
     // changes the dispay/direction, on phone devices

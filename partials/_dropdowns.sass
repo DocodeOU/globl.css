@@ -5,23 +5,6 @@
     & + &
         margin-left: 30px
 
-    // color state
-    &--light
-        .dropdown__wrapper
-            background-color: $light-background
-            color: $black
-
-        .dropdown__result:hover
-            background-color: darken($white, 4%)
-
-    &--dark
-        .dropdown__wrapper
-            background-color: $dark-background
-            color: $white
-
-        .dropdown__result:hover
-            background-color: rgba($light-background, 0.05)
-
     // text link that init/opens the dropdown__wrapper
     &__select-text
         cursor: pointer
@@ -46,6 +29,12 @@
         padding: 14px 0
         max-height: 350px
         overflow-y: auto
+        background-color: $default-background-color
+
+        @if $default-background-color == $light-background-color
+            color: $black
+        @else
+            color: $white
 
         +position(absolute, $top: 40px, $left: 0)
 
@@ -57,3 +46,9 @@
         cursor: pointer
         padding: 10px 20px
         white-space: nowrap
+
+        &:hover
+            @if $default-background-color == $light-background-color
+                background-color: darken($light-background-color, 4%)
+            @else
+                background-color: rgba($light-background-color, 0.05)
