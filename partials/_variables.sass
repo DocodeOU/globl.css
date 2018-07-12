@@ -50,6 +50,18 @@ $color-success: #32b643 !default
 $color-warning: #ffb700 !default
 $color-error: #E63C3C !default
 
+// usare variabili sass in css
+// https://codepen.io/jakealbaugh/post/css4-variables-and-sass
+$colors: primary, secondary, tertiary, success, warning, error
+
+\:root
+    // each item in color map
+    @each $name in $colors
+        --color-#{$name}: $color-#{$name}
+
+@function color($color-name)
+    @return var(--color-#{$color-name})
+
 // z-indexes
 $zindex-dropdown: 1000 !default
 $zindex-sticky: 1020 !default
