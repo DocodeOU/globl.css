@@ -175,7 +175,7 @@
     display: grid
 
     @for $i from 1 through 6
-        &__col-#{$i}
+        &__col#{$i}
             grid-template-columns: repeat(#{$i}, 1fr)
             grid-gap: 40px
 

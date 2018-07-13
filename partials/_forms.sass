@@ -34,8 +34,16 @@
 // Form Group : wrapper for inputs
 // ***************
 .formGroup
-    margin-bottom: 20px
+    margin-bottom: $padding-y
     position: relative
+
+    // Js Hook
+    &.hasError
+        margin-bottom: $padding-y / 2
+
+        .formInput:not(:focus), .formInput__hint
+            border-color: $color-error
+            color: $color-error
 
     &--small-margin
         margin-bottom: 10px
