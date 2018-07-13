@@ -1,0 +1,217 @@
+// notifications
+.notifications-container
+    +position(fixed, $top: 70px, $right: 0)
+
+    margin: 0 20px
+    z-index: $zindex-sticky
+    transition: top 0.5s
+
+    &--no-top
+        top: 20px
+
+.modal
+    &__container
+        +position(fixed, $top: 0, $right: 0, $bottom: 0, $left: 0)
+        +flex
+
+        justify-content: center
+        z-index: $zindex-modal-backdrop
+        overflow: auto
+
+        +media("<=phone")
+            padding-left: $padding-x-sm
+            padding-right: $padding-x-sm
+            flex-direction: column
+
+            .container
+                padding: 30px 0 80px
+
+
+        &--overlay
+            $opacity-level: if($default-background-color == $light-background-color, 0.5, 0.95)
+
+            background-color: rgba($dark-background-color, $opacity-level)
+
+    &__heading
+        margin-bottom: 30px
+        text-align: center
+
+    &__title
+        font-size: 2rem
+        font-weight: 700
+        margin: 0 auto 30px
+
+        // remove margin from title, if it's inside either of these 2 parent classes
+        .modalContent__top &, .modal__heading &
+            margin: 0
+
+        &--sm
+            width: 70%
+            margin-left: auto
+            margin-right: auto
+            font-size: 1.8rem
+
+    &__subtitle
+        font-size: 1.4rem
+        font-weight: 400
+        margin-top: 10px
+
+    &__icon
+        +square(26px)
+
+        fill: $color-primary
+        margin-bottom: 20px
+
+.modalDialog
+    +flex
+
+    justify-content: center
+    flex-direction: column
+    min-width: $modal-dialog-width
+    min-height: $modal-dialog-height
+    position: relative
+    padding: $padding-y-lg $padding-x-lg
+    border-radius: $border-radius-modals
+    background-color: $modals-background-color
+    box-shadow: 0 2px 2px 0 rgba(#000, 0.15)
+    z-index: $zindex-modal
+    overflow: hidden
+
+    +media("<=phone")
+        width: 100%
+        height: auto
+
+
+    &--noPadding
+        padding: 0
+
+    &--withLongText
+        max-width: 90vmin
+        height: auto
+        align-items: normal
+
+        .modalContent__body
+            text-align: left
+
+.modalContent
+    +flex
+
+    text-align: center
+    position: relative
+    width: 100%
+    flex-grow: 1
+
+    // one above the other, separate them with some margin
+    .btn + .btn
+        margin: 20px auto 0
+
+    // use when you have more than just __body
+    &--column
+        flex-direction: column
+
+    &--sideBySideButtons
+        // if there's only 1 button inside the parent
+        .btn:only-of-type
+            width: auto
+
+        // otherwise, give them the same width ||| remove on phones
+        .btn
+            width: 30%
+
+            +media("<=phone")
+                width: 100%
+                display: block
+
+        // give margin left on the second button ||| remove on phones
+        .btn + .btn
+            margin: 0 auto 0 20px
+
+            +media("<=phone")
+                margin-left: 0
+                margin-top: 10px
+
+    // Cases
+    // 1. modal with just content inside: small text + image, svg, whatever
+    // 2. modal with a title to specify what the modal is going to contain
+    // 3. modal with a footer: can be used for full width button at the bottom of the modal
+    // 4. 2 & 3 combined
+
+    $top-and-footer-height: 60px !default
+
+    &__top, &__footer
+        padding: $padding-y-sm 0
+        position: relative
+        flex-basis: $top-and-footer-height
+        width: 100%
+
+    &__top
+        +flex
+
+        justify-content: center
+        border-bottom: 1px solid $border-color
+
+    &__body
+        text-align: center
+        overflow-y: auto
+        max-height: 72vh
+        flex-grow: 1
+        padding: $padding-y $padding-x
+        -webkit-overflow-scrolling: touch
+
+    &__footer
+        border-top: 1px solid $border-color
+
+        // we can add this class if the footer has 1 item only, so the item gets verically centered
+        &--flex
+            +flex
+
+            justify-content: center
+
+    // *****
+    // if there is top and body, make body flex, with direction column
+    // *****
+    &__top + &__body
+        +flex
+
+        justify-content: center
+        flex-direction: column
+
+.modalcloseButton
+    +position(absolute, $top: 20px, $right: 20px)
+
+    cursor: pointer
+    transition-property: opacity $time-fast ease-in
+    z-index: $zindex-modal
+
+    &:hover
+        opacity: 0.6
+
+    // if we have more close btns, like the "GO BACK"
+    & + &
+        margin-top: 2px
+        right: 54px
+
+    // if it's a direct child of modalContainer use position fixed
+    // and make it white, becuase the overlays are always dark
+    .modal__container > &
+        position: fixed
+
+        +media(">phone")
+            color: $white
+
+    // if it's inside the modalContent__top div, align it with the modal title
+    .modalContent__top > &
+        +square(16px)
+
+        right: 10px
+        top: 46%
+        transform: translateY(-50%)
+
+// **********************
+// if .modalDialog--withLongText
+// add margin on last item inside body otherwise text or div is too close to modal end
+.modalDialog--withLongText .modalContent__body
+    display: block
+
+    > div:last-child, > p:last-child
+        margin-bottom: 40px
