@@ -1,3 +1,9 @@
+=set-color-from-lightness($color)
+    @if lightness($color) > 40
+        @return $black
+    @else
+        @return $white
+
 // positioning ==> postion: fixed 0 0 0 0
 =position($position, $top: null, $right: null, $bottom: null, $left: null)
     position: $position

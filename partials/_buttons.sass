@@ -25,8 +25,30 @@
     &--primary
         background-color: $color-primary
 
+        +set-color-from-lightness($color-primary)
+
     &--secondary
         background-color: $color-secondary
+
+        +set-color-from-lightness($color-secondary)
+
+    &--white
+        color: $black
+        background-color: $white
+
+        &:hover
+            color: $white
+            background-color: transparent
+            border-color: $white
+
+    &--black
+        color: $white
+        background-color: $black
+
+        &:hover
+            color: $black
+            border-color: $black
+            background-color: transparent
 
     // border
     &--border
