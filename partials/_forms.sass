@@ -1,39 +1,334 @@
-.input
-    &--toggle
-        z-index: -1
-        opacity: 0
+// ***************
+// Form
+// ***************
+.form
+    position: relative
+
+    &__title
+        margin-bottom: $padding-y
+
+    &__submit, &__footer
+        padding-top: $padding-y
+
+    &__footer
+        color: $grey
+
+        a
+            color: $color-primary
+
+            +darken-hover($color-primary)
+
+    &__divider
+        display: block
+        height: 1px
+        border: 0
+        border-top: 1px solid $border-color
+        padding: 0
+        margin: 50px -80px 40px
+
+        +media("<=phone")
+            margin-left: auto
+            margin-right: auto
+
+// ***************
+// Form Group : wrapper for inputs
+// ***************
+.formGroup
+    margin-bottom: 20px
+    position: relative
+
+    &--small-margin
+        margin-bottom: 10px
+
+    &--horizontal
+        +flex
+
+        .formLabel
+            margin: 0
+            text-align: left
+
+    // used to split the content inside
+    // input | input
+    &--col2
         margin: 0
+        display: grid
+        grid-template-columns: 1fr 1fr
+        grid-gap: 0 30px
 
-        & + label
-            position: relative
-            padding: 0 0 0 50px
-            cursor: pointer
-            font-size: 1.4rem
-            line-height: 20px
+        +media("<=phone")
+            grid-column-gap: $padding-x
 
-        & + label:after, & + label:before
-            content: ""
-            position: absolute
-            transition: 0.2s
-            border-radius: 20px
+    // adjust colors if form is used on light background
+    &--onLightBg
+        .formLabel
 
-        & + label:before
-            left: 0
-            background: #E7E9ED
-            border: 1px solid #CACED7
+        .formSelect
+            border-color: $grey
 
-            +size(35px, 20px)
+    &__forgotPassword
+        padding: 5px
+        position: absolute
+        right: 6px
+        top: 11px
+        font-size: 1rem
+        color: $dark-grey
 
-        & + label:after
-            top: 2px
-            left: 1px
-            background: #FFF
+// ***************
+// Form Label
+// ***************
+.formLabel
+    font-size: 1.4rem
+    font-weight: 300
+    margin-bottom: 4px
+    margin-right: 14px
+    color: $grey
+    display: inline-block
+    white-space: nowrap
+    flex: 2
 
-            +square(16px)
+// ***************
+// Form Input
+// ***************
+.formInput
+    border: none
+    border-bottom: 1px solid $dark-grey
+    background: 0 0
+    box-shadow: none
+    color: $white
+    padding: 18px 18px 14px
 
-        &:checked + label:before
-            background: $primary
-            border-color: $primary
+    +media("<=phone")
+        padding: 15px
 
-        &:checked + label:after
-            left: 18px
+
+    &::placeholder
+        text-transform: uppercase
+        color: $grey
+        font-size: 1rem
+
+    &:focus
+        border-color: $color-primary
+
+    // used on the make an offer modal, inside license selection option
+    &--white
+        background: darken(white, 5%)
+        border: 1px solid $grey
+        border-radius: 4px
+        padding: 10px 18px
+        color: $black
+
+        & + .formInput__hint
+            margin-bottom: 0
+
+    // sizes
+    &--lg
+        font-size: 2rem
+        text-align: center
+        padding: 17px 20px
+
+        &::placeholder
+            font-size: inherit
+            text-transform: none
+
+    &--fullWidth
+        width: 100%
+
+    &--rounded
+        border-radius: 50px
+        border: 1px solid $border-color
+
+    &__icon
+        z-index: 2
+        position: absolute
+        size: 18px
+        top: center
+        margin-left: 16px
+
+        &--lg
+            size: 24px
+            margin-left: 30px
+
+    &__hint
+        +position(absolute, $left: 0, $right: 0)
+
+        font-size: 1.2rem
+        font-weight: 300
+        padding-top: 5px
+
+// ***************
+// Select
+// ***************
+.formSelect
+    background-color: transparent
+    background-position: right 1rem center
+    background-size: 10px
+    background-repeat: no-repeat
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23667189'%20d='M2%200L0%202h4zm0%205L0%203h4z'/%3E%3C/svg%3E")
+    appearance: none
+    border: 1px solid $border-color
+    border-radius: 6px
+    color: inherit
+    outline: 0
+    padding: 12px 18px
+    vertical-align: middle
+    width: 100%
+    flex: 5
+
+// ***************
+// Input Checkbox
+// ***************
+input[type=checkbox].formCheckbox
+    display: none
+
+    & + label
+        font-weight: 400
+        font-size: 1.2rem
+        color: $grey
+        margin: 0 4px
+        cursor: pointer
+
+    & + label:before
+        content: " "
+        display: inline-block
+        size: 15px
+        border: 1px solid $dark-grey
+        border-radius: 2px
+        margin-right: 4px
+        position: relative
+        top: 3px
+
+    &:checked + label:before
+        background: url("/static/icons/artist/checkbox-custom.svg") transparent
+        background-repeat: no-repeat
+        background-size: 10px
+        background-position: center
+
+// ***************
+// Input Toogle
+// ***************
+.formToggle
+    z-index: -1
+    opacity: 0
+    margin: 0
+
+    & + label
+        position: relative
+        padding: 0 0 0 50px
+        cursor: pointer
+        font-size: 1.4rem
+        line-height: 20px
+
+    & + label:after, & + label:before
+        content: ""
+        position: absolute
+        transition: 0.2s
+        border-radius: 20px
+
+    & + label:before
+        left: 0
+        background: #E7E9ED
+        border: 1px solid #CACED7
+
+        +size(35px, 20px)
+
+    & + label:after
+        top: 2px
+        left: 1px
+        background: #FFF
+
+        +square(16px)
+
+    &:checked + label:before
+        background: $primary
+        border-color: $primary
+
+    &:checked + label:after
+        left: 18px
+
+// ***************
+// Input Range/Slider
+// ***************
+.slider
+    appearance: none
+    background: transparent
+    display: block
+    width: 100%
+    height: 40px
+    margin: 0
+    cursor: pointer
+
+    &:focus
+        outline: none
+
+    &.tooltip:not([data-tooltip])
+        &::after
+            content: attr(value)
+
+    // Slider Thumb
+    &::-webkit-slider-thumb
+        -webkit-appearance: none
+        background: $color-primary
+        border: 0
+        border-radius: 50%
+        height: 12px
+        margin-top: -(12px - 2px) / 2
+        transition: transform 0.2s ease
+        width: 12px
+
+    &::-moz-range-thumb
+        background: $color-primary
+        border: 0
+        border-radius: 50%
+        height: 12px
+        transition: transform 0.2s ease
+        width: 12px
+
+    &::-ms-thumb
+        background: $color-primary
+        border: 0
+        border-radius: 50%
+        height: 12px
+        transition: transform 0.2s ease
+        width: 12px
+
+    &:active
+        &::-webkit-slider-thumb
+            transform: scale(1.25)
+
+        &::-moz-range-thumb
+            transform: scale(1.25)
+
+        &::-ms-thumb
+            transform: scale(1.25)
+
+    &:disabled, &.disabled
+        &::-webkit-slider-thumb
+            background: $grey
+            transform: scale(1)
+
+        &::-moz-range-thumb
+            background: $grey
+            transform: scale(1)
+
+        &::-ms-thumb
+            background: $grey
+            transform: scale(1)
+
+    // Slider Track
+    &::-webkit-slider-runnable-track
+        background: #ddd
+        height: 2px
+        width: 100%
+
+    &::-moz-range-track
+        background: #ddd
+        height: 2px
+        width: 100%
+
+    &::-ms-track
+        background: #ddd
+        height: 2px
+        width: 100%
+
+    &::-ms-fill-lower
+        background: $color-primary
