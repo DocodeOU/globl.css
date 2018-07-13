@@ -51,12 +51,6 @@
         &--fromLeft:before
             background: linear-gradient(234deg, rgba($default-background-color, 0.4) 0%, rgba($default-background-color, 0.7) 50%, $default-background-color 75%)
 
-    // brings up the z-index of the items inside the header
-    & > .container
-        z-index: 2
-        position: relative
-        padding-top: 40px
-
 // ***************
 // SECTION
 // ***************
@@ -121,6 +115,8 @@
     max-width: $width-md
     margin-left: auto
     margin-right: auto
+    z-index: 2
+    position: relative
 
     // sizes
     &--xxs

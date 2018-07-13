@@ -50,7 +50,6 @@
     // used to split the content inside
     // input | input
     &--col2
-        margin: 0
         display: grid
         grid-template-columns: 1fr 1fr
         grid-gap: 0 30px
@@ -204,48 +203,6 @@ input[type=checkbox].formCheckbox
         background-position: center
 
 // ***************
-// Input Toogle
-// ***************
-.formToggle
-    z-index: -1
-    opacity: 0
-    margin: 0
-
-    & + label
-        position: relative
-        padding: 0 0 0 50px
-        cursor: pointer
-        font-size: 1.4rem
-        line-height: 20px
-
-    & + label:after, & + label:before
-        content: ""
-        position: absolute
-        transition: 0.2s
-        border-radius: 20px
-
-    & + label:before
-        left: 0
-        background: #E7E9ED
-        border: 1px solid #CACED7
-
-        +size(35px, 20px)
-
-    & + label:after
-        top: 2px
-        left: 1px
-        background: #FFF
-
-        +square(16px)
-
-    &:checked + label:before
-        background: $color-primary
-        border-color: $color-primary
-
-    &:checked + label:after
-        left: 18px
-
-// ***************
 // Input Range/Slider
 // ***************
 .slider
@@ -301,7 +258,7 @@ input[type=checkbox].formCheckbox
         &::-ms-thumb
             transform: scale(1.25)
 
-    &:disabled, &.disabled
+    &:disabled, &.isDisabled
         &::-webkit-slider-thumb
             background: $grey
             transform: scale(1)
@@ -332,3 +289,45 @@ input[type=checkbox].formCheckbox
 
     &::-ms-fill-lower
         background: $color-primary
+
+// ***************
+// Input Toogle
+// ***************
+.formToggle
+    z-index: -1
+    opacity: 0
+    margin: 0
+
+    & + label
+        position: relative
+        padding: 0 0 0 50px
+        cursor: pointer
+        font-size: 1.4rem
+        line-height: 20px
+
+    & + label:after, & + label:before
+        content: ""
+        position: absolute
+        transition: 0.2s
+        border-radius: 20px
+
+    & + label:before
+        left: 0
+        background: #E7E9ED
+        border: 1px solid #CACED7
+
+        +size(35px, 20px)
+
+    & + label:after
+        top: 2px
+        left: 1px
+        background: #FFF
+
+        +square(16px)
+
+    &:checked + label:before
+        background: $color-primary
+        border-color: $color-primary
+
+    &:checked + label:after
+        left: 18px

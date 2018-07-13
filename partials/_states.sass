@@ -1,0 +1,33 @@
+// ***************
+// JS Hookes & States
+// ***************
+.isDisabled
+    opacity: 0.5 !important
+    pointer-events: none
+    fill: $color-disabled
+    color: $color-disabled
+
+    &.btn
+        background-color: $color-disabled
+
+.hasError
+    .formInput:not(:focus), .formInput__hint
+        border-color: $color-error
+        color: $color-error
+
+.textIsError
+    color: $color-error
+
+.textIsWarning
+    color: $color-warning
+
+// if player is active
+section.playerisVisible
+    padding-bottom: 180px
+
+// if deal bar is active
+section.dealBarIsVisible
+    padding-bottom: 40px
+
+    +media("<phone")
+        padding-bottom: 80px

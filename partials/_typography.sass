@@ -2,35 +2,43 @@
 // Headings
 h1, h2, h3, h4, h5, h6
     color: inherit
-    font-weight: 500
+    font-weight: 700
     line-height: 1.2
     margin-bottom: 0.5em
     margin-top: 0
+    letter-spacing: 0.3px
 
-.h1, .h2, .h3, .h4, .h5, .h6
-    font-weight: 500
+    & + &, & + p
+        margin-top: 10px
+
+    & + .btn
+        margin-top: 30px
 
 h1, .h1
-    font-size: 2rem
+    font-size: 4rem
 
 h2, .h2
-    font-size: 1.6rem
+    font-size: 3rem
 
 h3, .h3
-    font-size: 1.4rem
+    font-size: 1.8rem
 
 h4, .h4
-    font-size: 1.2rem
+    font-size: 1.4rem
 
 h5, .h5
-    font-size: 1rem
+    font-size: 1.2rem
 
 h6, .h6
-    font-size: 0.8rem
+    font-size: 1rem
 
 // Paragraphs
 p
     margin: 0 0 $line-height
+    font-weight: 400
+
+    & + .btn
+        margin-top: 30px
 
 // Semantic text elements
 a, ins, u
