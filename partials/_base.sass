@@ -22,8 +22,7 @@ body
 
 \::selection
     background: $color-primary
-
-    +set-color-from-lightness($color-primary)
+    color: getBlackOrWhiteFromLightness($color-primary)
 
 /* recommended css code for vue-svgicon
 .svg-icon
