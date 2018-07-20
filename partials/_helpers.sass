@@ -7,11 +7,11 @@ $utility-class-slug: h !default
     $remValue: calc(#{nth($values, 1)} / 10)
 
     // if list $values has 2 items add both, otherwise add only the first one
-    #{$property}: if(length($values) == 2, #{$remValue}rem #{nth($values, 2)}, #{$remValue}rem)
-
-    // // on mobile, we devide the value passed, by 2
-    // +media("<=phone")
-    //     #{$property}: if(length($values) == 2, calc( #{nth($values, 1)}rem / 2 ) #{nth($values, 2)}, calc( #{nth($values, 1)}rem / 2 ))
+    @if length($values) == 2
+        #{$property}-top: #{$remValue}rem
+        #{$property}-bottom: #{$remValue}rem
+    @else
+        #{$property}: #{$remValue}rem
 
 // creates spacing utilities for padding/margin top and bottom
 @for $n from 10 through 160
@@ -37,6 +37,9 @@ $utility-class-slug: h !default
 .#{$utility-class-slug}-align-stretch
     align-items: stretch
 
+.#{$utility-class-slug}-alignCenter
+    align-items: center
+
 .#{$utility-class-slug}-justify-space-between
     justify-content: space-between
 
@@ -44,13 +47,16 @@ $utility-class-slug: h !default
     justify-content: center
 
 .#{$utility-class-slug}-blur
-    filter: blur(7px)
+    filter: blur(6px)
 
 .#{$utility-class-slug}-text-center
     text-align: center
 
 .#{$utility-class-slug}-text-left
     text-align: left
+
+.#{$utility-class-slug}-text-justify
+    text-align: justify
 
 .#{$utility-class-slug}-text-line-through
     text-decoration: line-through
@@ -59,11 +65,11 @@ $utility-class-slug: h !default
     text-decoration: underline
 
 .#{$utility-class-slug}-rounded
-    border-radius: 200px
+    border-radius: 200px !important
 
-// ***************
-// MEDIA QUERY
-// ***************
+.#{$utility-class-slug}-noWrap
+    white-space: nowrap
+
 +media(">=desktop")
     .#{$utility-class-slug}-hide\@desktop
         display: none
@@ -74,6 +80,13 @@ $utility-class-slug: h !default
         display: none
 
 
+// used on cart for phone, because otherwise content goes off screen
 +media("<=phone")
+    .#{$utility-class-slug}-flex-start\@phone
+        align-items: flex-start
+
+    .#{$utility-class-slug}-justify-start\@phone
+        justify-content: flex-start
+
     .#{$utility-class-slug}-hide\@phone
         display: none

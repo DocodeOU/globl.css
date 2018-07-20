@@ -13,11 +13,6 @@
     &__footer
         color: $grey
 
-        a
-            color: $color-primary
-
-            +darken-hover($color-primary)
-
     &__divider
         display: block
         height: 1px
@@ -30,26 +25,29 @@
             margin-left: auto
             margin-right: auto
 
+    &__error
+        margin-top: 10px
+        color: $color-danger
+
 // ***************
 // Form Group : wrapper for inputs
 // ***************
 .formGroup
-    margin-bottom: $padding-y
     position: relative
 
-    // Js Hook
-    &.hasError
-        margin-bottom: $padding-y / 2
+    & + &
+        margin-top: 20px
 
-        .formInput:not(:focus), .formInput__hint
-            border-color: $color-error
-            color: $color-error
-
-    &--small-margin
-        margin-bottom: 10px
-
+    // used to make label + input on same line or input + input, using the flex${n} class
     &--horizontal
-        +flex
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+
+        @for $n from 5 through 100
+            @if $n % 5 == 0
+                .flex#{$n}
+                    flex-basis: calc( #{$n}% - 5px)
 
         .formLabel
             margin: 0
@@ -60,17 +58,14 @@
     &--col2
         display: grid
         grid-template-columns: 1fr 1fr
-        grid-gap: 0 30px
+        grid-gap: 0 $padding-x
+
+        .formGroup
+            margin-top: 0
+            margin-bottom: 0
 
         +media("<=phone")
             grid-column-gap: $padding-x
-
-    // adjust colors if form is used on light background
-    &--onLightBg
-        .formLabel
-
-        .formSelect
-            border-color: $grey
 
     &__forgotPassword
         padding: 5px
@@ -87,45 +82,69 @@
     font-size: 1.4rem
     font-weight: 300
     margin-bottom: 4px
-    margin-right: 14px
-    color: $grey
-    display: inline-block
+    color: $form-label-color
+    display: block
     white-space: nowrap
     flex: 2
+
+    .formGroup--horizontal &
+        + .formSelect
+            margin-left: 14px
+
+            + label
+                margin-left: 14px
 
 // ***************
 // Form Input
 // ***************
 .formInput
     border: none
-    border-bottom: 1px solid $dark-grey
-    background: 0 0
+    border-radius: $form-border-radius
+    border-bottom: 1px solid $form-border-color
+    background-color: $form-background-color
     box-shadow: none
     color: $white
-    padding: 18px 18px 14px
+    padding: 14px 18px
+    font-size: 1.4rem
+    display: block
 
     +media("<=phone")
-        padding: 15px
+        padding: 14px
 
 
     &::placeholder
-        text-transform: uppercase
-        color: $grey
+        color: $form-placeholder-color
         font-size: 1rem
+        text-transform: uppercase
 
     &:focus
         border-color: $color-primary
 
-    // used on the make an offer modal, inside license selection option
-    &--white
-        background: darken(white, 5%)
-        border: 1px solid $grey
-        border-radius: 4px
-        padding: 10px 18px
-        color: $black
+    &.hasError:not(:focus)
+        border-color: $color-danger
+        color: $color-danger
 
-        & + .formInput__hint
-            margin-bottom: 0
+    // Js Hook
+    &.isDisabled
+        background-color: darken($form-background-color, 10%)
+        border-color: darken($form-border-color, 10%)
+        color: $dark-grey
+        cursor: not-allowed
+
+        &::placeholder
+            color: lighten($form-placeholder-color, 10%)
+
+    &--textarea
+        resize: vertical
+
+    &--withIcon
+        padding-left: 36px !important
+
+    &--selectCustom svg
+        +size(15px)
+
+        margin-top: 1px
+        float: right
 
     // sizes
     &--lg
@@ -145,22 +164,24 @@
         border: 1px solid $border-color
 
     &__icon
+        +size(18px)
+        +position(absolute, $top: 50%, $left: 14px)
+
+        transform: translateY(-50%)
         z-index: 2
         position: absolute
-        size: 18px
-        top: center
-        margin-left: 16px
 
         &--lg
             size: 24px
             margin-left: 30px
 
     &__hint
-        +position(absolute, $left: 0, $right: 0)
-
         font-size: 1.2rem
         font-weight: 300
-        padding-top: 5px
+        padding-top: 3px
+
+        &--error
+            color: $color-danger
 
 // ***************
 // Select
@@ -172,7 +193,7 @@
     background-repeat: no-repeat
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23667189'%20d='M2%200L0%202h4zm0%205L0%203h4z'/%3E%3C/svg%3E")
     appearance: none
-    border: 1px solid $border-color
+    border: 1px solid $form-border-color
     border-radius: 6px
     color: inherit
     outline: 0
@@ -193,6 +214,10 @@ input[type=checkbox].formCheckbox
         color: $grey
         margin: 0 4px
         cursor: pointer
+        transition: color $time-fast linear
+
+        &:hover
+            color: darken($grey, 10%)
 
     & + label:before
         content: " "
@@ -299,43 +324,96 @@ input[type=checkbox].formCheckbox
         background: $color-primary
 
 // ***************
-// Input Toogle
+// From Upload Input Type[file]
 // ***************
-.formToggle
-    z-index: -1
-    opacity: 0
-    margin: 0
+$form-upload-border-radius: 6px !default
 
-    & + label
-        position: relative
-        padding: 0 0 0 50px
+.formUpload
+    +flex
+
+    position: relative
+    flex-direction: column
+    justify-content: center
+    margin: 5px auto
+    padding: 10px
+    width: 100%
+    min-height: 140px
+    border-radius: $form-upload-border-radius
+
+    // sizes
+    &--lg
+        height: 200px
+
+    &--square
+        +size(200px)
+
+        &sM
+            +size(140px)
+
+    // states
+    &--empty
         cursor: pointer
-        font-size: 1.4rem
-        line-height: 20px
+        border: 1px dashed darken($form-border-color, 10%)
+        transition: border-color $time-standard ease-in, background-color $time-standard ease-in
 
-    & + label:after, & + label:before
-        content: ""
+        &:hover
+            border-color: $color-primary
+            background-color: rgba($color-primary, 0.05)
+
+            .formUpload__icon
+                fill: $color-primary
+
+    &--uploaded
+        cursor: pointer
+        background-color: $color-primary !important
+        border: none !important
+
+        .formUpload__icon
+            opacity: 0
+
+        &:hover
+            .formUpload__icon
+                opacity: 1
+                fill: $white
+
+            .formUpload__image
+                background-color: $color-primary
+                opacity: 0.5
+
+            .formUpload__btnDelete
+                opacity: 1
+                bottom: -10px
+
+    // native
+    &__inputHide, input
+        +position(absolute, $top: 0, $right: 0, $bottom: 0, $left: 0)
+
+        width: 100%
+        opacity: 0
+        cursor: pointer
+
+    // the pic icon
+    &__icon
+        +size(30px)
+
+        margin: 0 auto
+        fill: $light-grey
+        z-index: 2
+        transition: opacity $time-standard ease-in, fill $time-standard ease-in
+
+    // the image we see once it's uploaded
+    &__image
+        object-fit: cover
+        width: 100%
+        height: 100%
         position: absolute
-        transition: 0.2s
-        border-radius: 20px
+        transition: opacity $time-standard ease-in
+        border-radius: $form-upload-border-radius
 
-    & + label:before
-        left: 0
-        background: #E7E9ED
-        border: 1px solid #CACED7
+    // the delete btn we see if the image is uploaded, on hover
+    &__btnDelete
+        +position(absolute, $bottom: -3px, $right: 50%)
 
-        +size(35px, 20px)
-
-    & + label:after
-        top: 2px
-        left: 1px
-        background: #FFF
-
-        +square(16px)
-
-    &:checked + label:before
-        background: $color-primary
-        border-color: $color-primary
-
-    &:checked + label:after
-        left: 18px
+        transform: translateX(50%)
+        opacity: 0
+        transition: opacity $time-standard ease-in, bottom $time-standard ease-in

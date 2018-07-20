@@ -24,9 +24,6 @@
             padding-right: $padding-x-sm
             flex-direction: column
 
-            .container
-                padding: 30px 0 80px
-
 
         &--overlay
             $opacity-level: if($default-background-color == $light-background-color, 0.5, 0.95)
@@ -58,7 +55,7 @@
         margin-top: 10px
 
     &__icon
-        +square(26px)
+        +size(26px)
 
         fill: $color-primary
         margin-bottom: 20px
@@ -93,6 +90,12 @@
 
         .modalContent__body
             text-align: left
+            display: block !important
+            width: 100%
+
+            // add margin on last item inside body otherwise text or div is too close to modal end
+            > div:last-child, > p:last-child
+                margin-bottom: 40px
 
 .modalContent
     +flex
@@ -152,11 +155,12 @@
         border-bottom: 1px solid $border-color
 
     &__body
+        position: relative
         text-align: center
         overflow-y: auto
         max-height: 72vh
         flex-grow: 1
-        padding: $padding-y $padding-x
+        padding: $padding-y-lg $padding-x
         -webkit-overflow-scrolling: touch
 
     &__footer
@@ -202,17 +206,8 @@
 
     // if it's inside the modalContent__top div, align it with the modal title
     .modalContent__top > &
-        +square(16px)
+        +size(16px)
 
         right: 10px
         top: 46%
         transform: translateY(-50%)
-
-// **********************
-// if .modalDialog--withLongText
-// add margin on last item inside body otherwise text or div is too close to modal end
-.modalDialog--withLongText .modalContent__body
-    display: block
-
-    > div:last-child, > p:last-child
-        margin-bottom: 40px

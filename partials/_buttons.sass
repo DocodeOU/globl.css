@@ -1,67 +1,128 @@
 .btn
+    text-align: center
     display: inline-block
-    text-transform: uppercase
-    font-weight: 700
-    padding: 14px 24px
     white-space: nowrap
-    letter-spacing: 0.5px
+    position: relative
+    font-size: 1.3rem
+    letter-spacing: 0.3px
+    font-weight: 700
+    text-transform: uppercase
+    background-color: transparent
+    padding: 10px 16px
     border-radius: $border-radius
-    transition: box-shadow $time-standard linear, background $time-standard linear
+    border: 1px solid $color-primary
+    color: $color-primary
+    transition-property: box-shadow, background-color, border-color, color
+    transition-duration: 0.2s
+    transition-timing-function: linear
 
-    // sizes
+    &:hover
+        background-color: fade-out($color-primary, 0.9)
+
+    & + &:not(.btn--text)
+        +media(">=desktop")
+            margin-left: 10px
+
+    //** Sizes **
     &--xs
-        padding: 6px 8px
+        padding: 2px 4px
 
     &--sm
-        padding: 10px 16px
+        padding: 5px 12px
 
     &--lg
-        padding: 20px 30px
+        padding: 16px 22px
 
     &--fullWidth
         width: 100%
+        padding: 16px 22px
 
-    // color
-    &--primary
-        background-color: $color-primary
+    //** Colors => Backgrounds **
+    // each item in color map, => varables.sass
+    @for $index from 1 through length($colors-list)
+        $class-name: nth($color-class-names-list, $index)
+        $value: nth($colors-list, $index)
 
-        +set-color-from-lightness($color-primary)
+        // define class, if is a theme color using the css var, otherwise with $value
+        &--#{$class-name}
+            background-color: $value
+            border-color: $value
+            color: setBlackOrWhiteFromLightness($value)
 
-    &--secondary
-        background-color: $color-secondary
+            &:hover
+                background-color: darken($value, 6%)
 
-        +set-color-from-lightness($color-secondary)
+            &:active
+                background-color: darken($value, 10%)
 
-    &--white
-        color: $black
-        background-color: $white
+            // adjust specs if the html includes .btn--border as well
+            &.btn--border
+                background-color: transparent
+                box-shadow: none
 
-        &:hover
-            color: $white
-            background-color: transparent
-            border-color: $white
+                @if ($class-name == primary or $class-name == secondary or $class-name == tertiary) and $default-background-color == $dark-background-color
+                    color: $white
+                @else
+                    color: $value
 
-    &--black
-        color: $white
-        background-color: $black
+                &:hover
+                    color: setBlackOrWhiteFromLightness($value)
+                    background-color: $value
 
-        &:hover
-            color: $black
-            border-color: $black
-            background-color: transparent
+            // you can add this class along with the main class [.btn--primary], to redefine the styling
+            &.btn--text
+                background-color: transparent
+                border-color: transparent
+                box-shadow: none
+                color: $value
 
-    // border
-    &--border
-        border: 1px solid
+                &:hover
+                    box-shadow: none
 
-        &Primary
-            border-color: $color-primary
+                    // if it's black we make it lighter otherwise, darker
+                    @if $value == $black
+                        color: lighten($value, 30%)
+                    @else
+                        color: darken($value, 6%)
 
-        &Secondary
-            border-color: $color-secondary
+    //** Shapes **
+    &--rounded
+        border-radius: 50px
+
+    // button with icon
+    &--withIcon svg, &--withIcon .icon
+        margin-top: -3px
+        margin-right: 4px
 
 a.link
     color: $color-primary
 
+    &--underline
+        text-decoration: underline
+
     &:hover
-        color: darken($color-primary, 5%)
+        text-decoration: underline
+        color: darken($color-primary, 8%)
+
+.fabWrapper
+    +position(fixed, $bottom: -4px)
+
+    border-radius: 8px 8px 0 0
+    padding: 30px
+    z-index: $zindex-popover
+
+    &--right
+        right: 10px
+
+    &--left
+        left: 10px
+
+    .btn + .btn
+        margin-left: 1rem
+
+    +media("<=phone")
+        +position(fixed, $bottom: 0, $left: 0, $right: 0)
+
+        background-color: none
+        text-align: center
+        padding: 20px

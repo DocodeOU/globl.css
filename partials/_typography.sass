@@ -8,11 +8,17 @@ h1, h2, h3, h4, h5, h6
     margin-top: 0
     letter-spacing: 0.3px
 
-    & + &, & + p
-        margin-top: 10px
+    & + &
+        margin-top: 1rem
 
     & + .btn
-        margin-top: 30px
+        margin-top: 3rem
+
+        .flexbox &, .modalContent &
+            margin-top: 0
+
+    & + p
+        margin-top: 0.5rem
 
 h1, .h1
     font-size: 4rem
@@ -33,13 +39,35 @@ h6, .h6
     font-size: 1rem
 
 // Paragraphs
-p
-    margin: 0 0 $line-height
+p, .p, span, .span
+    line-height: 1.5
     font-weight: 400
 
     & + .btn
-        margin-top: 30px
+        margin-top: 3rem
+
+        +media(">=tablet")
+            .flexbox &
+                margin-top: 0
+                margin-left: 2rem
+
+    &--lead
+        font-weight: 400
+        letter-spacing: 0.2px
+
+    &--lightGrey
+        color: $light-grey
+
+    &--grey
+        color: $grey
 
 // Semantic text elements
 a, ins, u
     text-decoration-skip: ink edges
+
+// text helpers
+.textXs
+    font-size: $font-size-sm
+
+.textSm
+    font-size: $font-size

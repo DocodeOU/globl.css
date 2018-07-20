@@ -1,8 +1,6 @@
-=set-color-from-lightness($color)
-    @if lightness($color) > 40
-        color: $black
-    @else
-        color: $white
+=flex
+    display: flex
+    align-items: center
 
 // positioning ==> postion: fixed 0 0 0 0
 =position($position, $top: null, $right: null, $bottom: null, $left: null)
@@ -12,59 +10,72 @@
     bottom: $bottom
     left: $left
 
-// postcss size
-=size($width, $height)
-    width: $width
-    height: $height
-
-=square($size)
-    +size($size, $size)
+// set width and height in 1 property
+=size($size...)
+    @if length($size) == 2
+        width: #{nth($size, 1)}
+        height: #{nth($size, 2)}
+    @else
+        width: #{nth($size, 1)}
+        height: #{nth($size, 1)}
 
 // removes margin from first and last element on a container with repeated childs
 =no-margin-first-last
-    &:first-child
+    &:first-child, &:first-of-type
         margin-top: 0
         margin-left: 0
 
-    &:last-child
+    &:last-child, &:last-of-type
         margin-right: 0
+        margin-bottom: 0
 
-// Flex
-=flex
-    display: flex
-    align-items: center
-
-// Darken Text on Hover
-=darken-hover($color)
-    &:hover
-        color: darken($color, 5%)
-
-// Buttons
-=btn-border-color($btnBorderColor)
-    border: 1px solid $btnBorderColor
-
-    @if $btnBorderColor == $white
-        color: $white
+@function setBlackOrWhiteFromLightness($color)
+    @if lightness($color) > 60
+        @return $black
     @else
-        color: $btnBorderColor
+        @return $white
 
 =btn-hover($btnBgColor)
     &:hover
         @if $btnBgColor == $white
             color: $black
-            background: darken($btnBgColor, 5%)
-        @else if $btnBgColor == $grey or $btnBgColor == $black or $btnBgColor == $color-primary or $btnBgColor == $danger
+
+        @if $btnBgColor == $dark-grey
             color: $white
-            background: darken($btnBgColor, 5%)
-        @else
-            background: darken($btnBgColor, 5%)
+
+        background-color: darken($btnBgColor, 4%)
 
     &:active
         @if $btnBgColor == $white
             color: $black
-            background: darken($btnBgColor, 8%)
-        @else if $btnBgColor == $grey
-            color: $white
-            background: darken($btnBgColor, 8%)
 
-        background: darken($btnBgColor, 8%)
+        @if $btnBgColor == $dark-grey
+            color: $white
+
+        background-color: darken($btnBgColor, 10%)
+
+=placeholder-background
+    animation-duration: 1s
+    animation-fill-mode: forwards
+    animation-iteration-count: infinite
+    animation-name: placeHolderShimmer
+    animation-timing-function: linear
+    background: linear-gradient(to right, $black 8%, lighten($black, 5%) 18%, $black 33%)
+    background-size: 800px 104px
+    position: relative
+
+    @keyframes placeHolderShimmer
+        0%
+            background-position: (-468px) 0
+
+        100%
+            background-position: 468px 0
+
+=touch-feedback
+    transition: all 0.2s
+
+    &:hover
+        transform: scale(1.05)
+
+    &:active
+        transform: scale(0.95)

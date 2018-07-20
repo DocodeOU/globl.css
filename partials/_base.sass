@@ -3,6 +3,9 @@ html
     word-spacing: 1px
     overflow-x: hidden
 
+    +media("<tablet")
+        font-size: 8px
+
 body
     background-color: $default-background-color
 
@@ -12,10 +15,15 @@ body
         color: $white
 
     font-weight: 400
-    font-family: AvenirNext, helvetica, sans-serif
+    font-family: $base-font-family
     font-size: $font-size
     overflow-x: hidden
     line-height: $line-height
+
+\::selection
+    background: $color-primary
+
+    +set-color-from-lightness($color-primary)
 
 /* recommended css code for vue-svgicon
 .svg-icon

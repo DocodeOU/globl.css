@@ -17,28 +17,14 @@ $padding-y-sm: 14px !default
 $padding-y-lg: 30px !default
 
 // Font sizes
+$base-font-family: AvenirNext, helvetica, sans-serif !default
 $html-font-size: 10px !default
-$html-line-height: 1.2 !default
+$html-line-height: 1.3 !default
 $default-font-weight: 600 !default
 $font-size: 1.4rem !default
 $font-size-sm: 1.2rem !default
 $font-size-lg: 1.8rem !default
 $line-height: 1rem !default
-
-// Background Colors
-$dark-background-color: #181818 !default
-$light-background-color: white !default
-$default-background-color: $dark-background-color !default
-
-// Modals
-$modals-background-color: $default-background-color !default
-$modal-dialog-width: 50vmin !default
-$modal-dialog-height: 35vmin !default
-
-// Borders
-$border-radius: 50px !default
-$border-color: #262626 !default
-$border-radius-modals: 4px !default
 
 // Greyscale Colors
 $white: white !default
@@ -53,12 +39,39 @@ $color-disabled: #4B4A4A !default
 // Theme Colors
 $color-primary: #0269ff !default
 $color-secondary: #1DCF75 !default
-$color-tertiary: orange !default
+$color-tertiary: #4B4A4A !default
 
 // Control colors
 $color-success: #32b643 !default
 $color-warning: #ffb700 !default
-$color-error: #E63C3C !default
+$color-danger: #F91111 !default
+
+// Background Colors
+$dark-background-color: #181818 !default
+$light-background-color: white !default
+$default-background-color: $dark-background-color !default
+
+// shadows
+$shadow-sm: 0 2px 2px 0
+$shadow-md: 0 0px 5px 0
+$shadow-lg: 0 0px 10px 0
+
+// Forms
+$form-background-color: transparent !default
+$form-border-radius: 0px !default
+$form-border-color: $dark-grey !default
+$form-placeholder-color: $grey !default
+$form-label-color: $grey !default
+
+// Modals
+$modals-background-color: #202020 !default
+$modal-dialog-width: 60vmin !default
+$modal-dialog-height: 38vmin !default
+
+// Borders
+$border-radius: 50px !default
+$border-color: #262626 !default
+$border-radius-modals: 4px !default
 
 // z-indexes
 $zindex-dropdown: 1000 !default
@@ -74,11 +87,13 @@ $time-fast: 0.1s !default
 $time-standard: 0.3s !default
 $time-slow: 0.5s !default
 
-// usare variabili sass in css
-// https://codepen.io/jakealbaugh/post/css4-variables-and-sass
-$colors: primary, secondary, tertiary, success, warning, error
+// generate css vars
+$colors-list: $color-primary, $color-secondary, $color-tertiary, $color-danger, $white, $black, $grey, $light-grey, $dark-grey
+$color-class-names-list: primary, secondary, tertiary, danger, white, black, grey, lightGrey, darkGrey
 
 \:root
-    // each item in color map
-    @each $name in $colors
-        --color-#{$name}: $color-#{$name}
+    @for $index from 1 through 3
+        $value: nth($colors-list, $index)
+        $class-name: nth($color-class-names-list, $index)
+
+        --color-#{$class-name}: #{$value}
