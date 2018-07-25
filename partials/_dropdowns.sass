@@ -1,8 +1,5 @@
 @function modalBgIsLight()
-    @if lightness($modals-background-color) > 60
-        @return true
-    @else
-        @return false
+    @return lightness($modals-background-color) > 60
 
 .dropdown
     +media(">phone")
