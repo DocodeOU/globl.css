@@ -1,54 +1,125 @@
+@function modalBgIsLight()
+    @if lightness($modals-background-color) > 60
+        @return true
+    @else
+        @return false
+
 .dropdown
-    position: relative
+    +media(">phone")
+        position: relative
 
-    // spacing in case of multiple dropdowns
+
     & + &
-        margin-left: 30px
+        +media(">tablet")
+            margin-left: 25px
 
-    // text link that init/opens the dropdown__wrapper
-    &__select-text
-        cursor: pointer
+    // ****************
+    // ul | the modal | container | wrapper
+    // ****************
+    &__menu
+        +position(absolute, $top: 100%, $right: 0, $left: 0)
 
-        &--light
-            color: $white
-
-        &--dark
-            color: $black
-
-    &__icon
-        margin-left: 6px
-
-        +size(15px)
-
-    // the div container for all the items
-    &__wrapper
-        z-index: 50
-        border-radius: 4px
-        box-shadow: 0 2px 5px 0 rgba(#000, 0.15)
-        min-width: 160px
-        padding: 14px 0
+        padding: $padding-y-sm 0
         max-height: 350px
+        background: $modals-background-color
+        border-radius: $modal-border-radius
+        color: if(modalBgIsLight(), $black, $white)
+        box-shadow: 0 2px 7px 0 if(modalBgIsLight(), rgba(#000, 0.1), rgba(#000, 0.3))
+        z-index: $zindex-popover
         overflow-y: auto
-        background-color: $default-background-color
+        -webkit-overflow-scrolling: touch
 
-        @if $default-background-color == $light-background-color
-            color: $black
-        @else
-            color: $white
+        +media("<=phone")
+            margin-top: 10px
+            right: $padding-x-sm
+            left: $padding-x-sm
 
-        +position(absolute, $top: 40px, $left: 0)
 
-        &--align-right
-            +position(absolute, $top: 40px, $right: 0, $left: unset)
+        // ****************
+        // State | if you want an input inside the dropdown, alongside the __items
+        // ****************
+        &--withInput
+            input, .formInput
+                +position(sticky, $top: 0, $right: 0, $left: 0)
 
-    // the single items
-    &__result
+                margin: 0 auto $padding-y-sm
+                width: calc(100% -(#{$padding-y-sm} * 2))
+                outline: solid $padding-y-sm $modals-background-color
+                box-shadow: 0 0 0 $padding-y-sm $modals-background-color
+
+        // ****************
+        // size
+        // ****************
+        &--minWidth
+            min-width: 260px
+
+        // ****************
+        // position / alignment
+        // ****************
+        &--right
+            right: -10px
+            left: unset
+            min-width: 260px
+
+        &--bottom
+            margin-bottom: 10px
+            bottom: 100%
+            top: unset
+
+        // ****************
+        // background colors
+        // ****************
+        &--bgTransparent
+            $transparent-color: if(modalBgIsLight(), $modals-background-color, $default-background-color)
+
+            background-color: rgba($transparent-color, 0.9)
+            box-shadow: none
+
+    // ****************
+    // li | item
+    // ****************
+    &__item
+        +flex
+
         cursor: pointer
-        padding: 10px 20px
+        padding: 12px 20px
+        text-align: left
+        width: 100%
         white-space: nowrap
 
         &:hover
-            @if $default-background-color == $light-background-color
-                background-color: darken($light-background-color, 4%)
-            @else
-                background-color: rgba($light-background-color, 0.05)
+            background-color: if(modalBgIsLight(), darken($modals-background-color, 3%), lighten($modals-background-color, 3%))
+
+        &.isActive
+            background-color: $color-primary
+            color: $white
+
+        &--sm
+            padding-top: 8px
+            padding-bottom: 8px
+
+    // image inside the item
+    &__image
+        +size(60px)
+
+        object-fit: cover
+        margin-right: 10px
+        border-radius: 2px
+
+    // used to give a title to sections inside a dropdown
+    &__header
+        font-size: 13px
+        color: $grey
+        margin: 15px 15px 5px 15px
+        letter-spacing: 1px
+        line-height: 20px
+        text-transform: uppercase
+        text-align: left
+
+    // used to separate sections with a line divider ------
+    &__divider
+        display: block
+        height: 1px
+        border: 0
+        margin: 0
+        background-color: if(modalBgIsLight(), darken($modals-background-color, 5%), lighten($modals-background-color, 5%))

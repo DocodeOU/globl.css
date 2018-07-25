@@ -53,6 +53,9 @@
             margin: 0
             text-align: left
 
+        .formInput__hint
+            flex-basis: 100%
+
     // used to split the content inside
     // input | input
     &--col2
@@ -89,10 +92,10 @@
 
     .formGroup--horizontal &
         + .formSelect
-            margin-left: 14px
+            margin-left: 10px
 
             + label
-                margin-left: 14px
+                margin-left: 10px
 
 // ***************
 // Form Input
@@ -120,7 +123,7 @@
     &:focus
         border-color: $color-primary
 
-    &.hasError:not(:focus)
+    &.hasError, &.hasError:focus
         border-color: $color-danger
         color: $color-danger
 
@@ -138,7 +141,7 @@
         resize: vertical
 
     &--withIcon
-        padding-left: 36px !important
+        padding-left: 38px !important
 
     &--selectCustom svg
         +size(15px)
@@ -197,10 +200,14 @@
     border-radius: 6px
     color: inherit
     outline: 0
-    padding: 12px 18px
+    padding: 12px 18px 12px 14px
     vertical-align: middle
     width: 100%
     flex: 5
+
+    &.hasError:not(:focus)
+        border-color: $color-danger
+        color: $color-danger
 
 // ***************
 // Input Checkbox
@@ -341,6 +348,9 @@ $form-upload-border-radius: 6px !default
     border-radius: $form-upload-border-radius
 
     // sizes
+    &--sm
+        min-height: 100px
+
     &--lg
         height: 200px
 
@@ -372,9 +382,10 @@ $form-upload-border-radius: 6px !default
             opacity: 0
 
         &:hover
-            .formUpload__icon
+            .formUpload__icon, .formUpload__labelDropzone, label
                 opacity: 1
-                fill: $white
+                color: $white
+                font-weight: 600
 
             .formUpload__image
                 background-color: $color-primary
@@ -392,14 +403,27 @@ $form-upload-border-radius: 6px !default
         opacity: 0
         cursor: pointer
 
+    // icon & label
+    &__icon, &__labelDropzone, label
+        z-index: 2
+        position: relative
+        transition: opacity $time-standard ease-in, color $time-standard ease-in, font-weight $time-standard ease-in
+
+    // label
+    &__labelDropzone, label
+        color: $dark-grey
+        font-weight: 300
+        opacity: 0.5
+
     // the pic icon
     &__icon
         +size(30px)
 
         margin: 0 auto
-        fill: $light-grey
-        z-index: 2
-        transition: opacity $time-standard ease-in, fill $time-standard ease-in
+        color: $light-grey
+
+        & + .formUpload__labelDropzone
+            margin-top: 8px
 
     // the image we see once it's uploaded
     &__image
