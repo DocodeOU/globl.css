@@ -194,7 +194,7 @@
 // Select
 // ***************
 .formSelect
-    background-color: transparent
+    background-color: $form-background-color
     background-position: right 1rem center
     background-size: 10px
     background-repeat: no-repeat
@@ -212,6 +212,48 @@
     &.hasError:not(:focus)
         border-color: $color-danger
         color: $color-danger
+
+// ***************
+// Input Toggle
+// ***************
+.formToggle
+    z-index: -1
+    opacity: 0
+    margin: 0
+
+.formToggle + label
+    position: relative
+    padding: 0 0 0 50px
+    cursor: pointer
+    font-size: 1.4rem
+    line-height: 20px
+
+.formToggle + label:after, .formToggle + label:before
+    content: ""
+    position: absolute
+    transition: 0.2s
+    border-radius: 20px
+
+.formToggle + label:before
+    left: 0
+    width: 35px
+    height: 20px
+    background: #E7E9ED
+    border: 1px solid #CACED7
+
+.formToggle + label:after
+    top: 2px
+    left: 1px
+    width: 16px
+    height: 16px
+    background: #FFF
+
+.formToggle:checked + label:before
+    background: $color-primary
+    border-color: $color-primary
+
+.formToggle:checked + label:after
+    left: 18px
 
 // ***************
 // Input Checkbox
