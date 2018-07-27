@@ -101,6 +101,7 @@
 // Form Input
 // ***************
 .formInput
+    line-height: 1.5
     border: none
     border-radius: $form-border-radius
     background-color: $form-background-color
@@ -114,6 +115,9 @@
         border-bottom: 1px solid $form-border-color
     @else
         border: 1px solid $form-border-color
+
+    @if $form-border-color == transparent
+        border: none
 
     +media("<=phone")
         padding: 14px
@@ -194,6 +198,7 @@
 // Select
 // ***************
 .formSelect
+    line-height: 1.5
     background-color: $form-background-color
     background-position: right 1rem center
     background-size: 10px
