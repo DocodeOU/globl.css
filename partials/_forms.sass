@@ -103,13 +103,17 @@
 .formInput
     border: none
     border-radius: $form-border-radius
-    border-bottom: 1px solid $form-border-color
     background-color: $form-background-color
     box-shadow: none
-    color: $white
+    color: $form-input-color
     padding: 14px 18px
     font-size: 1.4rem
     display: block
+
+    @if $form-border-bottom-only
+        border-bottom: 1px solid $form-border-color
+    @else
+        border: 1px solid $form-border-color
 
     +media("<=phone")
         padding: 14px
