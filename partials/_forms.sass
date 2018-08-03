@@ -4,6 +4,9 @@
 .form
     position: relative
 
+    &--fullWidth
+        width: 100%
+
     &__title
         margin-bottom: $padding-y
 
@@ -173,6 +176,19 @@
     &--rounded
         border-radius: 50px
         border: 1px solid $border-color
+
+    // used to add a prefix on the input
+    &__addon
+        background-color: $grey
+        color: $white
+        border-radius: $form-border-radius 0 0 $form-border-radius
+        white-space: nowrap
+
+        & + input
+            border-radius: 0 $form-border-radius $form-border-radius 0
+
+        &:focus:not(.formhasError)
+            background: darken($grey, 5%)
 
     &__icon
         +size(18px)
