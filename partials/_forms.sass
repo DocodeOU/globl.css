@@ -132,7 +132,11 @@
         text-transform: uppercase
 
     &:focus
-        border-color: $color-primary
+        @if $form-border-color != transparent
+            border-color: $color-primary
+        @else
+            border: none
+            background: if($default-background-color == $dark-background-color, lighten($form-background-color, 1%), darken($form-background-color, 1%))
 
     &.hasError, &.hasError:focus
         border-color: $color-danger
@@ -176,6 +180,10 @@
     &--rounded
         border-radius: 50px
         border: 1px solid $border-color
+
+    // used as parent for formInput__addon
+    &__group
+        +flex
 
     // used to add a prefix on the input
     &__addon
