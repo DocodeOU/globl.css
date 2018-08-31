@@ -54,13 +54,13 @@
 
         background-color: darken($btnBgColor, 10%)
 
-=placeholder-background
+=placeholder-background($color)
     animation-duration: 1s
     animation-fill-mode: forwards
     animation-iteration-count: infinite
     animation-name: placeHolderShimmer
     animation-timing-function: linear
-    background: linear-gradient(to right, $black 8%, lighten($black, 5%) 18%, $black 33%)
+    background: linear-gradient(to right, $color 8%, lighten($color, 5%) 18%, $color 33%)
     background-size: 800px 104px
     position: relative
 
