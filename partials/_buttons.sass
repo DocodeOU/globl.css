@@ -90,9 +90,14 @@
         border-radius: 50px
 
     // button with icon
-    &--withIcon svg, &--withIcon .icon
+    &--withIconLeft svg, &--withIconLeft .icon, &--withIconRight svg, &--withIconRight .icon
         margin-top: -3px
+
+    &--withIconLeft svg, &--withIconLeft .icon
         margin-right: 4px
+
+    &--withIconRight svg, &--withIconRight .icon
+        margin-left: 4px
 
 a.link
     color: $color-primary
