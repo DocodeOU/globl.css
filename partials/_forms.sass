@@ -41,6 +41,9 @@
     & + &
         margin-top: 20px
 
+    &--fullWidth
+        width: 100%
+
     // used to make label + input on same line or input + input, using the flex${n} class
     &--horizontal
         display: flex
@@ -73,14 +76,6 @@
         +media("<=phone")
             grid-column-gap: $padding-x
 
-    &__forgotPassword
-        padding: 5px
-        position: absolute
-        right: 6px
-        top: 11px
-        font-size: 1rem
-        color: $dark-grey
-
 // ***************
 // Form Label
 // ***************
@@ -104,23 +99,15 @@
 // Form Input
 // ***************
 .formInput
-    line-height: 1.5
     border: none
     border-radius: $form-border-radius
+    border-bottom: 1px solid $form-border-color
     background-color: $form-background-color
     box-shadow: none
-    color: $form-input-color
+    color: $white
     padding: 14px 18px
     font-size: 1.4rem
     display: block
-
-    @if $form-border-bottom-only
-        border-bottom: 1px solid $form-border-color
-    @else
-        border: 1px solid $form-border-color
-
-    @if $form-border-color == transparent
-        border: none
 
     +media("<=phone")
         padding: 14px
@@ -132,11 +119,7 @@
         text-transform: uppercase
 
     &:focus
-        @if $form-border-color != transparent
-            border-color: $color-primary
-        @else
-            border: none
-            background: if($default-background-color == $dark-background-color, lighten($form-background-color, 1%), darken($form-background-color, 1%))
+        border-color: $color-primary
 
     &.hasError, &.hasError:focus
         border-color: $color-danger
@@ -181,23 +164,6 @@
         border-radius: 50px
         border: 1px solid $border-color
 
-    // used as parent for formInput__addon
-    &__group
-        +flex
-
-    // used to add a prefix on the input
-    &__addon
-        background-color: $grey
-        color: $white
-        border-radius: $form-border-radius 0 0 $form-border-radius
-        white-space: nowrap
-
-        & + input
-            border-radius: 0 $form-border-radius $form-border-radius 0
-
-        &:focus:not(.formhasError)
-            background: darken($grey, 5%)
-
     &__icon
         +size(18px)
         +position(absolute, $top: 50%, $left: 14px)
@@ -207,7 +173,8 @@
         position: absolute
 
         &--lg
-            size: 24px
+            +size(24px)
+
             margin-left: 30px
 
     &__hint
@@ -222,8 +189,7 @@
 // Select
 // ***************
 .formSelect
-    line-height: 1.5
-    background-color: $form-background-color
+    background-color: transparent
     background-position: right 1rem center
     background-size: 10px
     background-repeat: no-repeat
@@ -241,48 +207,6 @@
     &.hasError:not(:focus)
         border-color: $color-danger
         color: $color-danger
-
-// ***************
-// Input Toggle
-// ***************
-.formToggle
-    z-index: -1
-    opacity: 0
-    margin: 0
-
-.formToggle + label
-    position: relative
-    padding: 0 0 0 50px
-    cursor: pointer
-    font-size: 1.4rem
-    line-height: 20px
-
-.formToggle + label:after, .formToggle + label:before
-    content: ""
-    position: absolute
-    transition: 0.2s
-    border-radius: 20px
-
-.formToggle + label:before
-    left: 0
-    width: 35px
-    height: 20px
-    background: #E7E9ED
-    border: 1px solid #CACED7
-
-.formToggle + label:after
-    top: 2px
-    left: 1px
-    width: 16px
-    height: 16px
-    background: #FFF
-
-.formToggle:checked + label:before
-    background: $color-primary
-    border-color: $color-primary
-
-.formToggle:checked + label:after
-    left: 18px
 
 // ***************
 // Input Checkbox
@@ -304,7 +228,9 @@ input[type=checkbox].formCheckbox
     & + label:before
         content: " "
         display: inline-block
-        size: 15px
+
+        +size(15px)
+
         border: 1px solid $dark-grey
         border-radius: 2px
         margin-right: 4px
@@ -312,7 +238,7 @@ input[type=checkbox].formCheckbox
         top: 3px
 
     &:checked + label:before
-        background: url("/static/icons/artist/checkbox-custom.svg") transparent
+        background: url("../assets/checkbox-custom.svg") transparent
         background-repeat: no-repeat
         background-size: 10px
         background-position: center
