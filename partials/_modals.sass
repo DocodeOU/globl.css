@@ -18,10 +18,10 @@
         z-index: $zindex-modal-backdrop
         overflow-y: auto
         -webkit-overflow-scrolling: touch
+        padding-left: $padding-x-sm
+        padding-right: $padding-x-sm
 
         +media("<=phone")
-            padding-left: $padding-x-sm
-            padding-right: $padding-x-sm
             flex-direction: column
 
 
@@ -33,6 +33,7 @@
     &__heading
         margin-bottom: 30px
         text-align: center
+        font-size: 1.8rem
 
     &__title
         font-size: 2rem

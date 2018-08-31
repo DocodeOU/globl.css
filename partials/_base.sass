@@ -22,18 +22,24 @@ body
 
 \::selection
     background: $color-primary
-    color: getBlackOrWhiteFromLightness($color-primary)
+    color: setBlackOrWhiteFromLightness($color-primary)
 
-/* recommended css code for vue-svgicon
+// Mode Modules recommended css code for vue-svgicon
 .svg-icon
+    +size(20px)
+
     display: inline-block
-    width: 20px
-    height: 20px
     color: inherit
     vertical-align: middle
     fill: currentColor
     stroke: none
+    cursor: pointer
 
 .svg-fill
     fill: currentColor
     stroke: none
+
+// Mode Modules recommended css code for vue-svgicon
+.vue-js-switch
+    text-transform: uppercase
+    margin-left: 6px

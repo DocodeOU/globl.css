@@ -47,7 +47,7 @@
         &--#{$class-name}
             background-color: $value
             border-color: $value
-            color: getBlackOrWhiteFromLightness($value)
+            color: setBlackOrWhiteFromLightness($value)
 
             &:hover
                 background-color: darken($value, 6%)
@@ -66,7 +66,7 @@
                     color: $value
 
                 &:hover
-                    color: getBlackOrWhiteFromLightness($value)
+                    color: setBlackOrWhiteFromLightness($value)
                     background-color: $value
 
             // you can add this class along with the main class [.btn--primary], to redefine the styling

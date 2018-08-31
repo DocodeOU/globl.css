@@ -151,6 +151,12 @@
     &--xl
         max-width: $width-xl
 
+    &--halfWidth
+        max-width: 50%
+
+        +media("<=phone")
+            max-width: 100%
+
     &--fullWidth
         max-width: 100%
 
@@ -176,17 +182,18 @@
     &--column
         flex-direction: column
 
-        +media("<phone")
-            &\@phone
-                flex-direction: column
+    +media("<phone")
+        // changes the dispay/direction, on phone devices
+        &--column\@phone
+            flex-direction: column
 
 .grid
     display: grid
+    grid-gap: 40px
 
     @for $i from 1 through 6
         &__col#{$i}
             grid-template-columns: repeat(#{$i}, 1fr)
-            grid-gap: 40px
 
             +media("<tablet")
                 grid-template-columns: 1fr

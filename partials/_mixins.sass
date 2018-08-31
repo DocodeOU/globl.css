@@ -29,7 +29,7 @@
         margin-right: 0
         margin-bottom: 0
 
-@function getBlackOrWhiteFromLightness($color)
+@function setBlackOrWhiteFromLightness($color)
     @if lightness($color) > 60
         @return $black
     @else
