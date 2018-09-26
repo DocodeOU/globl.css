@@ -100,8 +100,12 @@
 // ***************
 .formInput
     border: none
+    @if ($is-form-border-bottom-only)
+        border-bottom: $form-border-size solid $form-border-color
+    @else        
+        border: $form-border-size solid $form-border-color
+
     border-radius: $form-border-radius
-    border-bottom: 1px solid $form-border-color
     background-color: $form-background-color
     box-shadow: none
     color: $white
