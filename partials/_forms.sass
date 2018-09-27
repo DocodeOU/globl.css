@@ -227,19 +227,17 @@ input[type=checkbox].formCheckbox
             color: darken($grey, 10%)
 
     & + label:before
+        +size(15px)
         content: " "
         display: inline-block
-
-        +size(15px)
-
-        border: 1px solid $dark-grey
+        border: $form-border-size solid $form-border-color
         border-radius: 2px
         margin-right: 4px
         position: relative
         top: 3px
 
     &:checked + label:before        
-        background: url('data:image/svg+xml;utf8,<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M22.083 3.142c-.948-.51-2.005.474-2.624 1.057-1.422 1.385-2.624 2.989-3.973 4.447-1.494 1.603-2.88 3.207-4.41 4.774-.875.875-1.822 1.823-2.406 2.916-1.312-1.276-2.442-2.66-3.9-3.79-1.056-.802-2.806-1.385-2.77.546.073 2.515 2.297 5.212 3.937 6.925.692.73 1.604 1.495 2.66 1.531 1.276.073 2.588-1.458 3.354-2.296 1.348-1.458 2.442-3.098 3.68-4.593 1.604-1.968 3.245-3.9 4.812-5.904.984-1.24 4.082-4.3 1.64-5.613z" fill="#14F35F" fill-rule="nonzero"/></svg>') transparent
+        background: url('data:image/svg+xml;utf8,<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M22.083 3.142c-.948-.51-2.005.474-2.624 1.057-1.422 1.385-2.624 2.989-3.973 4.447-1.494 1.603-2.88 3.207-4.41 4.774-.875.875-1.822 1.823-2.406 2.916-1.312-1.276-2.442-2.66-3.9-3.79-1.056-.802-2.806-1.385-2.77.546.073 2.515 2.297 5.212 3.937 6.925.692.73 1.604 1.495 2.66 1.531 1.276.073 2.588-1.458 3.354-2.296 1.348-1.458 2.442-3.098 3.68-4.593 1.604-1.968 3.245-3.9 4.812-5.904.984-1.24 4.082-4.3 1.64-5.613z" fill="#{$form-checkbox-check-color}" fill-rule="nonzero"/></svg>') $form-checkbox-checked-background-color
         background-repeat: no-repeat
         background-size: 10px
         background-position: center
