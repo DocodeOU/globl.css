@@ -376,6 +376,53 @@ input[type=checkbox].formCheckbox
     &::-ms-fill-lower
         background: $color-primary
 
+
+
+// ***************
+// From Radio Button
+// ***************
+input[type="radio"].formRadio
+    display: none
+    & + label
+        display: inline-block 
+        position: relative
+        padding-left: 20px
+        margin: 0 4px
+        
+        &:before
+            +size(16px)
+            +position(absolute, $top: 0, $left: 0)
+            content: ''
+            display: block 
+            border-radius: 50%
+            margin-right: 5px
+            border: $form-border-size solid $form-border-color
+        
+        &:after
+            +size(8px)
+            +position(absolute, $top: 4px, $left: 4px)
+            content: ''
+            display: block
+            background: $color-primary
+            border-radius: 50%
+            opacity: 0
+            transform: scale(0,0) 
+            transition: all .2s cubic-bezier(0.64, 0.57, 0.67, 1.53)
+    
+    &:checked + label:before
+        background-color: $form-border-color
+    
+    &:checked + label:after
+        opacity: 1
+        transform: scale(1,1)
+
+// space them if on same div
+input[type="radio"].formRadio + label + input[type="radio"].formRadio + label
+    margin-left: $padding-x-sm
+
+
+
+
 // ***************
 // From Upload Input Type[file]
 // ***************
