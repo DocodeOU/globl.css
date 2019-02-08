@@ -33,6 +33,29 @@
         color: $color-danger
 
 // ***************
+// Form Layout
+// ***************
+.formLayout
+    display: grid
+    grid-template-columns: 1fr
+    grid-row-gap: $padding-y-sm
+    grid-column-gap: $padding-x
+
+    @function repeatString($value, $n)
+        $finalValue: ''
+        @for $i from 1 through $n 
+            $finalValue: $finalValue + $value + ' '
+        $finalValue: unquote($finalValue)
+        @return $finalValue
+
+    @for $i from 2 through 6
+        &--col#{$i}
+            grid-template-columns: repeatString(1fr, $i)
+
+    &--verticalCenter
+        align-items: center
+    
+// ***************
 // Form Group : wrapper for inputs
 // ***************
 .formGroup
@@ -50,7 +73,7 @@
         @for $n from 5 through 100
             @if $n % 5 == 0
                 .flex#{$n}
-                    flex-basis: calc( #{$n}% - 5px)
+                    flex-basis: calc(#{$n}% - 5px)
 
         .formLabel
             margin: 0
