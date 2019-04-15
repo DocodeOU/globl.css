@@ -8,10 +8,10 @@ $utility-class-slug: h !default
 
     // if list $values has 2 items add both, otherwise add only the first one
     @if length($values) == 2
-        #{$property}-top: #{$remValue}rem
-        #{$property}-bottom: #{$remValue}rem
+        #{$property}-top: #{$remValue}rem !important
+        #{$property}-bottom: #{$remValue}rem !important
     @else
-        #{$property}: #{$remValue}rem
+        #{$property}: #{$remValue}rem !important
 
 // creates spacing utilities for padding/margin top and bottom
 @for $n from 10 through 160
