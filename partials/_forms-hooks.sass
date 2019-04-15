@@ -1,0 +1,20 @@
+.formInput, .formSelect
+    // Js Hook
+    &.isDisabled
+        background-color: darken($form-background-color, 10%)
+        border-color: darken($form-border-color, 10%)
+        color: $dark-grey
+        cursor: not-allowed
+
+        &::placeholder
+            color: lighten($form-placeholder-color, 10%)
+
+.formInput
+    &.hasError, &.hasError:focus
+        border-color: $color-danger
+        color: $color-danger    
+
+.formSelect
+    &.hasError:not(:focus)
+        border-color: $color-danger
+        color: $color-danger
