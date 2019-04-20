@@ -99,9 +99,9 @@ $time-slow: 0.5s !default
 $colors-list: $color-primary, $color-secondary, $color-tertiary, $color-danger, $white, $black, $grey, $light-grey, $dark-grey
 $color-class-names-list: primary, secondary, tertiary, danger, white, black, grey, lightGrey, darkGrey
 
-\:root
-    @for $index from 1 through 3
-        $value: nth($colors-list, $index)
-        $class-name: nth($color-class-names-list, $index)
+// \:root
+//     @for $index from 1 through 3
+//         $value: nth($colors-list, $index)
+//         $class-name: nth($color-class-names-list, $index)
 
-        --color-#{$class-name}: #{$value}
+//         --color-#{$class-name}: #{$value}
