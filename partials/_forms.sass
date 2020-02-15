@@ -32,6 +32,7 @@
         margin-top: 10px
         color: $color-danger
 
+
 // ***************
 // Form Layout
 // ***************
@@ -55,6 +56,7 @@
     &--verticalCenter
         align-items: center
     
+
 // ***************
 // Form Group : wrapper for inputs
 // ***************
@@ -96,6 +98,7 @@
         +media("<=phone")
             grid-column-gap: $padding-x
 
+
 // ***************
 // Form Label
 // ***************
@@ -114,6 +117,7 @@
 
             + label
                 margin-left: 10px
+
 
 // ***************
 // Form Input
@@ -136,7 +140,6 @@
     +media("<=phone")
         padding: 14px
 
-
     &::placeholder
         color: $form-placeholder-color
         font-size: 1rem
@@ -144,7 +147,6 @@
 
     &:focus
         border-color: $color-primary
-
 
     &--textarea
         resize: vertical
@@ -154,7 +156,6 @@
 
     &--selectCustom svg
         +size(15px)
-
         margin-top: 1px
         float: right
 
@@ -178,14 +179,11 @@
     &__icon
         +size(18px)
         +position(absolute, $top: 50%, $left: 14px)
-
         transform: translateY(-50%)
         z-index: 2
-        position: absolute
 
         &--lg
             +size(24px)
-
             margin-left: 30px
 
     &__hint
@@ -195,6 +193,7 @@
 
         &--error
             color: $color-danger
+
 
 // ***************
 // Select
@@ -214,6 +213,7 @@
     vertical-align: middle
     width: 100%
     flex: 5
+
 
 // ***************
 // Input Checkbox
@@ -247,7 +247,6 @@ input[type=checkbox].formCheckbox
         background-repeat: no-repeat
         background-size: 10px
         background-position: center
-
 
 
 
@@ -436,7 +435,6 @@ $form-upload-border-radius: 6px !default
 
 .formUpload
     +flex
-
     position: relative
     flex-direction: column
     justify-content: center
@@ -504,7 +502,7 @@ $form-upload-border-radius: 6px !default
 
     // icon & label
     &__icon, &__labelDropzone, label
-        z-index: 2
+        z-index: 3
         position: relative
         transition: opacity $time-standard ease-in, color $time-standard ease-in, font-weight $time-standard ease-in
 
@@ -517,7 +515,6 @@ $form-upload-border-radius: 6px !default
     // the pic icon
     &__icon
         +size(30px)
-
         margin: 0 auto
         color: $light-grey
 
