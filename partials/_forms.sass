@@ -72,11 +72,6 @@
         justify-content: space-between
         flex-wrap: wrap
 
-        @for $n from 5 through 100
-            @if $n % 5 == 0
-                .flex#{$n}
-                    flex-basis: calc(#{$n}% - 5px)
-
         .formLabel
             margin: 0
             text-align: left
